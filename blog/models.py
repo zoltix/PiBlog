@@ -34,4 +34,6 @@ class Comment(models.Model):
     pseudo = models.CharField(max_length=100)
     email = models.EmailField()
     contenu = models.TextField(null=True)
+    date = models.DateTimeField(verbose_name="Date de parution",
+                                auto_now_add=False, auto_now=True)
     article = models.ForeignKey('Article', on_delete=models.CASCADE)

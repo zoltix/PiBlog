@@ -24,7 +24,7 @@ def lire_article(request, slug):
     fourni en paramètre
     """
     article = get_object_or_404(Article, slug=slug)
-    com = Comment
+    commentaires = Comment.objects.filter(article__id=article.id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
         contenu= form.cleaned_data['contenu']

@@ -26,13 +26,16 @@
 			<input class="pure-button pure-button-primary" type="submit" />
 		</p>
 	</form>
-
 	<div class="clear"></div>
 
-	
-	<div class="commentaire">
-		<p>Maxime, le 28 mai 2019</p>
-		<p>Ceci est un exemple de commentaire, qui est à remplacer par votre modèle</p>
-	</div>
+	{% for commentaire in commentaires %}
+		<div class="commentaire">
+			<p class="infos-comment">Par {{ commentaire.pseudo }}, le {{ commentaire.date }}</p>
+			<p class="contenu-commen">{{ commentaire.contenu|safe }}</p>
+		</div>
+	{% empty %}
+		<p>Aucun article.</p>
+	{% endfor %}
+
 
 {% endblock %}
