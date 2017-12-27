@@ -7,10 +7,13 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ('titre', 'auteur', 'categorie', 'date', 'is_visible', )
     list_filter = ('categorie', )
     search_fields = ('title', 'auteur', )
-
     prepopulated_fields = {'slug': ('titre', )}
 
+class CommentsAdmin(admin.ModelAdmin):
+    list_display = ('pseudo','article', 'is_visible')
+    list_filter = ('article', 'is_visible')
+    search_fields = ('pseudo', 'contenu', )
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Categorie)
-admin.site.register(Comment)
+admin.site.register(Comment,CommentsAdmin)

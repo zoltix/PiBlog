@@ -36,4 +36,6 @@ class Comment(models.Model):
     contenu = models.TextField(null=True)
     date = models.DateTimeField(verbose_name="Date de parution",
                                 auto_now_add=False, auto_now=True)
+    is_visible = models.BooleanField(verbose_name="Commentaire publié ?",
+                                     default=True)
     article = models.ForeignKey('Article', on_delete=models.CASCADE)

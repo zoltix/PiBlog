@@ -8,5 +8,6 @@ class CommentForm(forms.ModelForm):
     class Meta:
         """"meta pour le formulaire"""
         model = Comment
-        fields = '__all__'
+        #fields = '__all__'
+        fields = ('pseudo', 'email', 'contenu')
             
