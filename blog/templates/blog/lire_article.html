@@ -31,7 +31,7 @@
 	{% for commentaire in commentaires %}
 		<div class="commentaire">
 			<p class="infos-comment">Par {{ commentaire.pseudo }}, le {{ commentaire.date }}</p>
-			<p class="contenu-commen">{{ commentaire.contenu|safe }}</p>
+			<p class="contenu-comment">{{ commentaire.contenu|safe }}</p>
 		</div>
 	{% empty %}
 		<p>Aucun article.</p>
