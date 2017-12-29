@@ -15,7 +15,7 @@ def accueil(request):
     le moment.
     """
     #articles = Article.objects.filter(is_visible=True).order_by('-date')[:4]
-    articles = Article.objects.filter(is_visible=True,comment__is_visible=True).values('id','titre','slug','date','contenu').annotate(nbrcommentaire=Count('comment'))
+    articles = Article.objects.filter(is_visible=TrueSS).values('id','titre','slug','date','contenu').annotate(nbrcommentaire=Count('comment'))
     #articles = Article.objects.filter(is_visible=True,comment__is_visible=True).values('titre','date','contenu','comment__is_visible').annotate(nbrcommentaire=Count('comment'))
 
 
