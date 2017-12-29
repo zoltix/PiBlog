@@ -18,7 +18,7 @@
 	<h3 class="titre-comments">Commentaires</h3>
 
 	<h4>Poster votre propre commentaire</h4>
-	<form  method="post" class="pure-form">
+	<form  method="post" class="pure-form"  action=".">
 		<!-- A vous de remplir le formulaire également -->
 		{% csrf_token %}
 		{{ form.as_p }}

@@ -24,7 +24,7 @@ def lire_article(request, slug):
     fourni en paramètre
     """
     article = get_object_or_404(Article, slug=slug)
-    commentaires = Comment.objects.filter(article__id=article.id, is_visible=True).order_by('-date')[:4]
+    commentaires = Comment.objects.filter(article__id=article.id, is_visible=True).order_by('-date')#[:4]
     form = CommentForm(request.POST or None)
     if form.is_valid():
         contenu= form.cleaned_data['contenu']
@@ -34,5 +34,6 @@ def lire_article(request, slug):
         com =Comment(pseudo=pseudo, email=email, contenu=contenu)
         com.article = article
         com.save()
-        return HttpResponseRedirect(reverse("blog.views.lire_article"))
+        form  = CommentForm()
+        #return HttpResponseRedirect(reverse("blog.views.lire_article"))
     return render(request, 'blog/lire_article.html', locals())

@@ -39,3 +39,4 @@ class Comment(models.Model):
     is_visible = models.BooleanField(verbose_name="Commentaire publié ?",
                                      default=True)
     article = models.ForeignKey('Article', on_delete=models.CASCADE)
+

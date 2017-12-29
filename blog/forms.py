@@ -10,4 +10,3 @@ class CommentForm(forms.ModelForm):
         model = Comment
         #fields = '__all__'
         fields = ('pseudo', 'email', 'contenu')
-            
