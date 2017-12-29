@@ -1,6 +1,7 @@
 # -*-coding:Utf-8 -*
 """ définition des vues """
 from django.shortcuts import render, get_object_or_404,HttpResponseRedirect,reverse
+from django.db.models import Count
 from .models import Article, Comment
 from .forms import CommentForm
 
@@ -13,7 +14,11 @@ def accueil(request):
     possibilité de lire les articles plus vieux via l'accueil pour
     le moment.
     """
-    articles = Article.objects.filter(is_visible=True).order_by('-date')[:4]
+    #articles = Article.objects.filter(is_visible=True).order_by('-date')[:4]
+    articles = Article.objects.filter(is_visible=True,comment__is_visible=True).values('id','titre','slug','date','contenu').annotate(nbrcommentaire=Count('comment'))
+    #articles = Article.objects.filter(is_visible=True,comment__is_visible=True).values('titre','date','contenu','comment__is_visible').annotate(nbrcommentaire=Count('comment'))
+
+
 
     return render(request, 'blog/accueil.html', {'articles': articles})
 
