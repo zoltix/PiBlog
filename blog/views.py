@@ -1,7 +1,8 @@
 # -*-coding:Utf-8 -*
 """ définition des vues """
 from django.shortcuts import render, get_object_or_404,HttpResponseRedirect,reverse
-from django.db.models import Count
+from django.db.models import Count, Q, Sum, Case
+from django.db import models
 from .models import Article, Comment
 from .forms import CommentForm
 
@@ -15,11 +16,16 @@ def accueil(request):
     le moment.
     """
     #articles = Article.objects.filter(is_visible=True).order_by('-date')[:4]
-    articles = Article.objects.filter(is_visible=TrueSS).values('id','titre','slug','date','contenu').annotate(nbrcommentaire=Count('comment'))
+    #articles = Article.objects.filter(is_visible=True).values('titre','slug','date','contenu').annotate(nbrcommentaire=Count('comment'))
+    #articles = Article.objects.filter(is_visible=True).values('titre','slug','date','contenu').annotate(nbrcommentaire=Count('comment',filter=Q(comment__is_visible=1)))
     #articles = Article.objects.filter(is_visible=True,comment__is_visible=True).values('titre','date','contenu','comment__is_visible').annotate(nbrcommentaire=Count('comment'))
+    articles = Article.objects.all().annotate(nbrcommentaire=models.Sum(
+        models.Case(
+            models.When(comment__is_visible=1, then=1),
+            default=0, output_field=models.IntegerField()
+        )))
 
-
-
+    print(articles.query)
     return render(request, 'blog/accueil.html', {'articles': articles})
 
 
